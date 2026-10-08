@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Registration form</title>
+</head>
+<style>
+    body{
+        background-color: beige;
+        font-family: "Arimo", sans-serif;
+    }
+    .regform{
+        background-color: #A8D5E3;
+    }
+    .signup{
+        background-color: beige;
+    }
+    .signup:hover{
+        opacity: 0.5;
+    }
+    input:focus {
+        outline: none;
+        box-shadow: rgba(53, 113, 243, 0.856) 0px 1px 4px 0px, rgba(53, 113, 243, 0.856) 0px 0px 0px 1px;
+    }
+    .hidden{
+        display: none;
+    }
+</style>
+<body>
+    <div class="w-screen h-screen flex justify-center items-center">
+        <div class="regform rounded p-3 flex gap-3" style="width: 45%; box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);">
+            <div class="flex justify-center items-center">
+                <i class="fa-solid fa-circle-user p-10" style="font-size: 250px; color: black;"></i>
+            </div>
+            <p class="h-96 border border-black"></p>
+            <div class="flex flex-col justify-center items-center">
+                <table>
+                    <tr>
+                        <td class="text-black text-3xl p-3 align-top">Name</td>
+                        <td class="p-3 align-top">
+                            <input type="text" class="rounded p-1 name-input block">
+                            <span class="text-red-600 nameerror hidden"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-black text-3xl p-3 align-top">Email</td>
+                        <td class="p-3 align-top">
+                            <input type="mail" class="rounded p-1 mail-input block">
+                            <span class="text-red-600 mailerror hidden">*Name field is empty</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="text-black text-3xl p-3 align-top">Password</td>
+                        <td class="p-3 align-top">
+                            <input type="password" class="rounded p-1 password-input block">
+                            <span class="text-red-600 passerror hidden">*Name field is empty</span>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <button class="signup p-2 rounded w-1/4 hidden">Sign Up</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        var name_input = document.querySelector(".name-input");
+        var mail_input = document.querySelector(".mail-input");
+        var pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        var password_input = document.querySelector(".password-input");
+        var nameerror = document.querySelector(".nameerror");
+        var mailerror = document.querySelector(".mailerror");
+        var passerror = document.querySelector(".passerror");
+        var signup = document.querySelector(".signup");
+
+        name_input.addEventListener("keyup",function(){
+            if(!name_input.value){
+                nameerror.textContent = "*Name field is empty";
+                nameerror.classList.remove("hidden");
+            }else{
+                nameerror.classList.add("hidden");
+            }
+            valid();
+            
+        });
+
+        mail_input.addEventListener("keyup",function(){
+            if(!mail_input.value){
+                mailerror.textContent = "*Email field is empty";
+                mailerror.classList.remove("hidden");
+            }else if(!pattern.test(mail_input.value)){
+                mailerror.textContent = "*Email format is Invalid";
+                mailerror.classList.remove("hidden");
+            }else{
+                mailerror.classList.add("hidden");   
+            }
+            valid();
+        });
+
+        password_input.addEventListener("keyup",function(){
+            if(!password_input.value){
+                passerror.textContent = "*Password field is empty";
+                passerror.classList.remove("hidden");
+            }else if(password_input.value.length < 6){
+                passerror.textContent = "*Password should more than 5 characters";
+                passerror.classList.remove("hidden");
+            }else{
+                passerror.classList.add("hidden");
+            }
+            valid();
+        });
+
+        function valid(){
+            if(name_input.value && mail_input.value && pattern.test(mail_input.value) && password_input.value && password_input.value.length >= 6){
+                signup.classList.remove("hidden");
+            }else{
+                signup.classList.add("hidden");
+            }
+        }
+
+    </script> 
+    
+</body>
+</html>
