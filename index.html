@@ -17,14 +17,17 @@
     }
     .regform{
         background-color: #A8D5E3;
+        width: 45%; 
+        box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
     }
     .signup{
         background-color: beige;
     }
     .signup:hover{
         opacity: 0.5;
+        cursor: pointer;
     }
-    input:focus {
+    table input:focus {
         outline: none;
         box-shadow: rgba(53, 113, 243, 0.856) 0px 1px 4px 0px, rgba(53, 113, 243, 0.856) 0px 0px 0px 1px;
     }
@@ -33,8 +36,8 @@
     }
 </style>
 <body>
-    <div class="w-screen h-screen flex justify-center items-center">
-        <div class="regform rounded p-3 flex gap-3" style="width: 45%; box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);-moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);">
+    <form class="w-screen h-screen flex justify-center items-center">
+        <div class="regform rounded p-3 flex gap-3">
             <div class="flex justify-center items-center">
                 <i class="fa-solid fa-circle-user p-10" style="font-size: 250px; color: black;"></i>
             </div>
@@ -64,10 +67,10 @@
                     </tr>
                 </table>
                 <br>
-                <button class="signup p-2 rounded w-1/4 hidden">Sign Up</button>
+                <input class="signup p-2 rounded w-1/4 hidden" type="submit" value="Submit">
             </div>
         </div>
-    </div>
+    </form>
     <script>
         var name_input = document.querySelector(".name-input");
         var mail_input = document.querySelector(".mail-input");
@@ -114,6 +117,10 @@
             }
             valid();
         });
+
+        signup.addEventListener("click",function(){
+            alert("Successfully Created");
+        })
 
         function valid(){
             if(name_input.value && mail_input.value && pattern.test(mail_input.value) && password_input.value && password_input.value.length >= 6){
